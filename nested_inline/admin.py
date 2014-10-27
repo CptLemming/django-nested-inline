@@ -19,6 +19,7 @@ csrf_protect_m = method_decorator(csrf_protect)
 
 
 class NestedModelAdmin(admin.ModelAdmin):
+    sortable_field = 'position'
 
     class Media:
         css = {
@@ -233,7 +234,8 @@ class NestedModelAdmin(admin.ModelAdmin):
             'inline_admin_formsets': inline_admin_formsets,
             'errors': helpers.AdminErrorList(form, formsets),
             'app_label': opts.app_label,
-            }
+            'sortable_field': self.sortable_field,
+        }
         context.update(extra_context or {})
         return self.render_change_form(request, context, form_url=form_url, add=True)
 
@@ -330,7 +332,8 @@ class NestedModelAdmin(admin.ModelAdmin):
             'inline_admin_formsets': inline_admin_formsets,
             'errors': helpers.AdminErrorList(form, formsets),
             'app_label': opts.app_label,
-            }
+            'sortable_field': self.sortable_field,
+        }
         context.update(extra_context or {})
         return self.render_change_form(request, context, change=True, obj=obj, form_url=form_url)
 
