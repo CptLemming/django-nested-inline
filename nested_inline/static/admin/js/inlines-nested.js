@@ -135,6 +135,64 @@
                 nextIndex = nextIndex + 1;
             });
         }
+
+        $('.nested-inline-collapse', $(this)).on('click', function() {
+          var parent = $(this).parent().parent();
+          parent.find('fieldset.module.aligned').toggle();
+          parent.find('div.inline-group').toggle();
+          $(this).toggleClass('expanded');
+        });
+
+        var sortableStackedInline = function() {
+          var field = 'question_no';
+          var inline_group = $('.inline-group');
+          $('div.field-'+ field).hide();
+
+          if (inline_group.find('input[name$=-INITIAL_FORMS]').val() <= 1){
+            return;
+          }
+
+          $('.inline-related:not(.last-related) h3').css('cursor', 'move');
+
+          inline_group.sortable({
+            axis: 'y',
+            items: '.inline-related:not(.last-related)',
+            cursor: 'move',
+            update: function (event, ui) {
+              $('.inline-related:not(.last-related)').each(function (i) {
+                $('input[id$='+ field +']', this).val(i + 1);
+              });
+            }
+          });
+        };
+
+        var sortableTabularInline = function () {
+          var field = "position";
+          // hide the position column
+          $('th:contains("Position"), td.field-position').hide();
+          var inline_related = $('.inline-related');
+
+          if (inline_related.find('input[name$=-INITIAL_FORMS]').val() <= 1){
+            return;
+          }
+
+          $('.inline-related .form-row.has_original').css('cursor', 'move');
+
+          inline_related.sortable({
+            axis: 'y',
+            items: '.form-row.has_original',
+            cursor: 'move',
+            update: function (event, ui) {
+              $('.inline-related .form-row.has_original').each(function (i) {
+                $('input[id$='+ field +']', this).val(i + 1);
+              });
+            }
+          });
+        };
+
+        sortableStackedInline();
+        sortableTabularInline();
+
         return this;
     };
     /* Setup plugin defaults */
@@ -274,6 +332,7 @@
                 reinitDateTimeShortCuts();
                 updateSelectFilter();
                 update_inline_labels(row.parent());
+                sortableStackedInline();
             })
         });
 

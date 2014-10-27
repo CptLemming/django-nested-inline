@@ -255,6 +255,20 @@ body.popup .submit-row {
     border-bottom: 1px solid #ddd;
 }
 
+.nested-inline-collapse {
+	background-image: url(../img/selector-icons.gif);
+	width: 16px;
+	display: inline-block;
+	height: 16px;
+	background-position-y: 229px;
+	cursor: pointer;
+	margin-right: 3px;
+}
+
+.nested-inline-collapse.expanded {
+	background-position-y: 281px;
+}
+
 .inline-related h3 span.delete {
     float: right;
 }
@@ -351,6 +365,11 @@ body.popup .submit-row {
     padding-left: 14px;
     font-size: 11px;
     outline: 0; /* Remove dotted border around link */
+}
+
+.inline-related > fieldset.module.aligned,
+  .inline-related > div.inline-group {
+	display: none;
 }
 
 .nested-inline {

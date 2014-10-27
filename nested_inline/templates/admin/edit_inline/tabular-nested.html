@@ -4,7 +4,7 @@
   <div class="tabular inline-related {% if forloop.last %}last-related{% endif %}" id="{{ recursive_formset.formset.prefix }}">
 {{ recursive_formset.formset.management_form }}
 <fieldset class="module">
-   <h2>{{ recursive_formset.opts.verbose_name_plural|capfirst }}</h2>
+   <h2>{{ recursive_formset.opts.verbose_name_plural|capfirst }} - <span class="description">Note: Drag &amp; drop rows to reorder. Save new inline row first</span></h2>
    {{ recursive_formset.formset.non_form_errors }}
    <table>
      <thead><tr>

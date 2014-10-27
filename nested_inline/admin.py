@@ -24,7 +24,7 @@ class NestedModelAdmin(admin.ModelAdmin):
         css = {
             "all": ('admin/css/forms-nested.css',)
         }
-        js = ('admin/js/inlines-nested.js',)
+        js = ('admin/js/jquery-ui-1.10.3.sortable.min.js', 'admin/js/inlines-nested.js',)
 
     def get_inline_instances(self, request, obj=None):
         inline_instances = []
@@ -333,7 +333,6 @@ class NestedModelAdmin(admin.ModelAdmin):
             }
         context.update(extra_context or {})
         return self.render_change_form(request, context, change=True, obj=obj, form_url=form_url)
-
 
 
 class NestedInline(InlineModelAdmin):
